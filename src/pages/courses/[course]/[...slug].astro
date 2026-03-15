@@ -11,7 +11,8 @@ export async function getStaticPaths() {
   for (const entry of courses) {
     if (!entry.data.chapter) continue; // Only chapter entries, not index
 
-    const slug = entry.id.split('/').pop();
+    const rawSlug = entry.id.split('/').pop();
+    const slug = rawSlug.replace('.md', '');
     const { Content } = await render(entry);
 
     paths.push({

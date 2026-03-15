@@ -1,126 +1,123 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Progress from '../components/Progress';
 
-const chapters = [
-  { chapter: 1, title: "รู้จักกับ Valuation", subtitle: "แนวคิดพื้นฐานการประเมินมูลค่า", topics: ["Price vs Value", "3 แนวทางการประเมิน", "DCF, Relative, Real Options"] },
-  { chapter: 2, title: "Time Value of Money", subtitle: "เงินวันนี้มีค่ามากกว่าเงินวันหน้า", topics: ["Present Value (PV)", "Future Value (FV)", "Discount Rate"] },
-  { chapter: 3, title: "Discount Rate (WACC)", subtitle: "ต้นทุนเงินทุนถัวเฉลี่ยถ่วงน้ำหนัก", topics: ["Cost of Equity", "Cost of Debt", "WACC Calculation"] },
-  { chapter: 4, title: "Cash Flow (FCFF/FCFE)", subtitle: "กระแสเงินสดอิสระ", topics: ["FCFF vs FCFE", "ปรับปรุงงบการเงิน", "CapEx & Working Capital"] },
-  { chapter: 5, title: "Growth Rate", subtitle: "ประมาณการเติบโต", topics: ["Retention Ratio", "ROE & Growth", "Sustainable Growth"] },
-  { chapter: 6, title: "Terminal Value", subtitle: "มูลค่าสุดท้ายของธุรกิจ", topics: ["Gordon Growth Model", "Exit Multiple", "ความเสี่ยงของ TV"] },
-  { chapter: 7, title: "DCF Complete", subtitle: "สร้างโมเดล DCF ฉบับสมบูรณ์", topics: ["รวมทุกส่วนเข้าด้วยกัน", "Sensitivity Analysis", "ตรวจสอบความสมเหตุสมผล"] },
-  { chapter: 8, title: "Relative Valuation", subtitle: "เปรียบเทียบกับหุ้นอื่น", topics: ["P/E, P/B, EV/EBITDA", "Peer Group Analysis", "ข้อจำกัดของ Multiples"] },
-  { chapter: 9, title: "Sector-Specific Valuation", subtitle: "ประเมินมูลค่าตามอุตสาหกรรม", topics: ["ธนาคาร & ประกัน", "อสังหาริมทรัพย์", "Startup & High-Growth"] },
-  { chapter: 10, title: "Valuation Traps", subtitle: "หลุมพรางที่ต้องระวัง", topics: ["Value Trap vs Value", "สัญญาณเตือน", "ตรวจสอบคุณภาพตัวเลข"] },
-  { chapter: 11, title: "หุ้นไทย", subtitle: "ประยุกต์ใช้กับตลาดไทย", topics: ["SET Factsheet", "ตัวอย่าง CPALL, ADVANC, BDMS", "ข้อควรระวังตลาดไทย"] },
-  { chapter: 12, title: "สรุปและประยุกต์", subtitle: "Case Study แบบครบวงจร", topics: ["ทบทวนทุกบท", "สร้าง Checklist", "แหล่งข้อมูลเพิ่มเติม"] },
+const courses = [
+  {
+    id: 'damodaran-valuation',
+    title: 'Damodaran Valuation',
+    subtitle: 'ศิลปะและศาสตร์แห่งการประเมินมูลค่าธุรกิจ',
+    emoji: '🎓',
+    chapters: 12,
+    description: 'หลักสูตร 12 บท โดย Prof. Aswath Damodaran - Dean of Valuation จาก NYU Stern School of Business',
+    topics: ['DCF Valuation', 'Relative Valuation', 'หุ้นไทย']
+  }
 ];
 ---
 
 <BaseLayout title="หน้าแรก" description="Episteme - แพลตฟอร์มเรียนรู้">
   <!-- Cover Section -->
-  <section class="cover">
-    <div class="cover-content">
-      <span class="cover-badge">🎓 หลักสูตรออนไลน์</span>
-      <h1>Damodaran Valuation</h1>
-      <h2>ศิลปะและศาสตร์แห่งการประเมินมูลค่าธุรกิจ</h2>
-
-      <div class="instructor-card">
-        <div class="instructor-avatar">👨‍🏫</div>
-        <div class="instructor-info">
-          <div class="instructor-name">Prof. Aswath Damodaran</div>
-          <div class="instructor-title">NYU Stern School of Business • "Dean of Valuation"</div>
-        </div>
-      </div>
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-badge">📚 Episteme</div>
+      <h1>แพลตฟอร์มเรียนรู้</h1>
+      <p class="hero-subtitle">ความรู้ที่จัดสรรไว้เพื่อคุณ</p>
     </div>
+    <div class="hero-pattern"></div>
   </section>
 
-  <!-- Progress Section -->
-  <section class="progress-section">
-    <div class="progress-container">
-      <Progress course="damodaran-valuation" totalChapters={12} client:load />
-    </div>
-  </section>
-
-  <!-- Table of Contents -->
-  <section class="toc-section">
-    <div class="toc-header">
-      <h2>📚 สารบัญ</h2>
-      <p>คลิกเพื่อเข้าสู่บทเรียนแต่ละบท</p>
+  <!-- Courses Section -->
+  <section class="courses-section">
+    <div class="section-header">
+      <h2>📖 คอร์สทั้งหมด</h2>
+      <p>เลือกคอร์สที่คุณสนใจ</p>
     </div>
 
-    <div class="chapter-grid">
-      {chapters.map(({ chapter, title, subtitle, topics }) => (
-        <a
-          href={`/courses/damodaran-valuation/${String(chapter).padStart(2, '0')}`}
-          class="chapter-card"
-          data-chapter={chapter}
-        >
-          <div class="card-header">
-            <span class="chapter-number">บทที่ {chapter}</span>
-            <h3 class="chapter-title">{title}</h3>
-            <p class="chapter-subtitle">{subtitle}</p>
+    <div class="courses-grid">
+      {courses.map(course => (
+        <a href={`/courses/${course.id}/`} class="course-card">
+          <div class="course-emoji">{course.emoji}</div>
+          <h3 class="course-title">{course.title}</h3>
+          <p class="course-subtitle">{course.subtitle}</p>
+          <p class="course-description">{course.description}</p>
+
+          <div class="course-topics">
+            {course.topics.map(topic => (
+              <span class="topic-tag">{topic}</span>
+            ))}
           </div>
-          <div class="card-body">
-            <ul class="chapter-topics">
-              {topics.map(topic => <li>{topic}</li>)}
-            </ul>
-            <span class="chapter-status status-locked" data-status>⬜ ยังไม่เรียน</span>
+
+          <div class="course-meta">
+            <span class="chapter-count">📝 {course.chapters} บท</span>
+            <span class="start-btn">เริ่มเรียน →</span>
           </div>
         </a>
       ))}
     </div>
   </section>
 
+  <!-- Features Section -->
+  <section class="features-section">
+    <h2>✨ สิ่งที่คุณจะได้</h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">📊</div>
+        <h3>ติดตามความก้าวหน้า</h3>
+        <p>เห็นว่าเรียนไปแล้วกี่ % และบทไหนที่ยังไม่ได้เรียน</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📝</div>
+        <h3>Quiz ท้ายบท</h3>
+        <p>ทดสอบความเข้าใจหลังจากอ่านแต่ละบท</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔍</div>
+        <h3>ค้นหาเนื้อหา</h3>
+        <p>ค้นหาทุกบทเรียนได้จากที่เดียว</p>
+      </div>
+    </div>
+  </section>
+
   <!-- Footer -->
   <footer class="footer">
     <div class="footer-content">
-      <h3>📚 แหล่งข้อมูลเพิ่มเติม</h3>
-      <div class="footer-links">
-        <a href="https://pages.stern.nyu.edu/~adamodar/" target="_blank">🌐 Damodaran Online</a>
-        <span>📖 Investment Valuation</span>
-        <span>📖 The Little Book of Valuation</span>
-      </div>
-      <p class="footer-note">
-        Episteme - แพลตฟอร์มเรียนรู้<br>
-        อัปเดตล่าสุด: 15 มีนาคม 2026
-      </p>
+      <p class="footer-brand">📚 Episteme</p>
+      <p class="footer-tagline">ความรู้คือพลัง • Knowledge is Power</p>
+      <p class="footer-note">อัปเดตล่าสุด: 15 มีนาคม 2026</p>
     </div>
   </footer>
 </BaseLayout>
 
 <style>
-  /* Cover specific styles */
-  .cover {
+  /* Hero Section */
+  .hero {
     background: linear-gradient(135deg, #1a365d 0%, #2c5282 50%, #2b6cb0 100%);
     color: white;
-    padding: 60px 20px;
+    padding: 80px 20px;
     text-align: center;
     position: relative;
     overflow: hidden;
     border-radius: var(--radius-xl);
-    margin-bottom: 30px;
+    margin-bottom: 40px;
   }
 
-  .cover::before {
-    content: "";
+  .hero-pattern {
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
     background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    pointer-events: none;
   }
 
-  .cover-content {
+  .hero-content {
     position: relative;
     z-index: 1;
-    max-width: 800px;
+    max-width: 600px;
     margin: 0 auto;
   }
 
-  .cover-badge {
+  .hero-badge {
     display: inline-block;
     background: rgba(255,255,255,0.15);
     padding: 8px 20px;
@@ -130,168 +127,214 @@ const chapters = [
     backdrop-filter: blur(10px);
   }
 
-  .cover h1 {
-    font-size: 2.8em;
+  .hero h1 {
+    font-size: 3em;
     font-weight: 700;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
   }
 
-  .cover h2 {
-    font-size: 1.3em;
-    font-weight: 400;
+  .hero-subtitle {
+    font-size: 1.2em;
     opacity: 0.9;
-    margin-bottom: 30px;
   }
 
-  .instructor-card {
-    display: inline-flex;
-    align-items: center;
-    background: rgba(255,255,255,0.1);
-    padding: 15px 25px;
-    border-radius: 50px;
-    backdrop-filter: blur(10px);
-    margin-top: 10px;
-  }
-
-  .instructor-avatar {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.2);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.5em;
-    margin-right: 15px;
-  }
-
-  .instructor-info {
-    text-align: left;
-  }
-
-  .instructor-name {
-    font-weight: 600;
-    font-size: 1.1em;
-  }
-
-  .instructor-title {
-    font-size: 0.85em;
-    opacity: 0.8;
-  }
-
-  /* TOC Section */
-  .toc-section {
-    padding: 50px 20px;
-    max-width: 1100px;
+  /* Courses Section */
+  .courses-section {
+    padding: 40px 20px;
+    max-width: 1000px;
     margin: 0 auto;
   }
 
-  .toc-header {
+  .section-header {
     text-align: center;
     margin-bottom: 40px;
   }
 
-  .toc-header h2 {
+  .section-header h2 {
     font-size: 1.8em;
     color: #1a365d;
     margin-bottom: 10px;
   }
 
-  .toc-header p {
+  .section-header p {
     color: #718096;
+  }
+
+  .courses-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    gap: 30px;
+  }
+
+  @media (max-width: 500px) {
+    .courses-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .course-card {
+    background: white;
+    border-radius: var(--radius-lg);
+    padding: 35px;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow-sm);
+    border: 2px solid transparent;
+  }
+
+  .course-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-md);
+    border-color: #2b6cb0;
+  }
+
+  .course-emoji {
+    font-size: 3em;
+    margin-bottom: 20px;
+  }
+
+  .course-title {
+    color: #1a365d;
+    font-size: 1.5em;
+    margin-bottom: 8px;
+    font-weight: 700;
+  }
+
+  .course-subtitle {
+    color: #2b6cb0;
+    font-size: 1em;
+    margin-bottom: 15px;
+    font-weight: 500;
+  }
+
+  .course-description {
+    color: #4a5568;
+    font-size: 0.95em;
+    margin-bottom: 20px;
+    line-height: 1.6;
+  }
+
+  .course-topics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 25px;
+  }
+
+  .topic-tag {
+    background: #ebf8ff;
+    color: #2b6cb0;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.85em;
+    font-weight: 500;
+  }
+
+  .course-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 20px;
+    border-top: 1px solid #e2e8f0;
+  }
+
+  .chapter-count {
+    color: #718096;
+    font-size: 0.9em;
+  }
+
+  .start-btn {
+    background: linear-gradient(135deg, #1a365d 0%, #2c5282 100%);
+    color: white;
+    padding: 10px 20px;
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    font-size: 0.9em;
+    transition: all 0.3s ease;
+  }
+
+  .course-card:hover .start-btn {
+    background: linear-gradient(135deg, #38a169 0%, #48bb78 100%);
+  }
+
+  /* Features Section */
+  .features-section {
+    background: white;
+    padding: 60px 20px;
+    border-radius: var(--radius-xl);
+    max-width: 1000px;
+    margin: 40px auto;
+  }
+
+  .features-section h2 {
+    text-align: center;
+    font-size: 1.8em;
+    color: #1a365d;
+    margin-bottom: 40px;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .feature-card {
+    text-align: center;
+    padding: 30px 20px;
+    border-radius: var(--radius-lg);
+    background: #f7fafc;
+    transition: all 0.3s ease;
+  }
+
+  .feature-card:hover {
+    background: #ebf8ff;
+    transform: translateY(-5px);
+  }
+
+  .feature-icon {
+    font-size: 3em;
+    margin-bottom: 15px;
+  }
+
+  .feature-card h3 {
+    color: #1a365d;
+    margin-bottom: 10px;
+    font-size: 1.1em;
+  }
+
+  .feature-card p {
+    color: #718096;
+    font-size: 0.9em;
+    line-height: 1.6;
   }
 
   /* Footer */
   .footer {
-    background: #1a365d;
-    color: white;
-    padding: 40px 20px;
     text-align: center;
-    margin-top: 50px;
-    border-radius: var(--radius-xl);
+    padding: 50px 20px;
+    margin-top: 40px;
   }
 
-  .footer-content {
-    max-width: 600px;
-    margin: 0 auto;
+  .footer-brand {
+    font-size: 1.5em;
+    font-weight: 700;
+    color: #1a365d;
+    margin-bottom: 10px;
   }
 
-  .footer h3 {
+  .footer-tagline {
+    color: #718096;
     margin-bottom: 15px;
   }
 
-  .footer-links {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    margin-top: 20px;
-    flex-wrap: wrap;
-  }
-
-  .footer-links a,
-  .footer-links span {
-    color: #90cdf4;
-    text-decoration: none;
-  }
-
-  .footer-links a:hover {
-    text-decoration: underline;
-  }
-
   .footer-note {
-    margin-top: 30px;
+    color: #a0aec0;
     font-size: 0.85em;
-    opacity: 0.7;
-  }
-
-  @media (max-width: 768px) {
-    .cover h1 {
-      font-size: 2em;
-    }
-
-    .cover h2 {
-      font-size: 1.1em;
-    }
-
-    .footer-links {
-      flex-direction: column;
-      gap: 15px;
-    }
   }
 </style>
-
-<script>
-  // Update chapter status from localStorage
-  document.addEventListener('DOMContentLoaded', () => {
-    const course = 'damodaran-valuation';
-    const stored = localStorage.getItem(`episteme-progress-${course}`);
-    if (!stored) return;
-
-    const completed = JSON.parse(stored);
-    document.querySelectorAll('.chapter-card').forEach(card => {
-      const chapter = parseInt(card.getAttribute('data-chapter') || '0');
-      const status = card.querySelector('[data-status]');
-      if (completed.includes(chapter) && status) {
-        status.className = 'chapter-status status-done';
-        status.textContent = '✅ เรียนจบ';
-        card.classList.add('completed');
-        card.classList.remove('locked');
-      }
-    });
-
-    // Find first uncompleted and mark as current
-    const firstUncompleted = [...document.querySelectorAll('.chapter-card')]
-      .find(card => !completed.includes(parseInt(card.getAttribute('data-chapter') || '0')));
-
-    if (firstUncompleted) {
-      firstUncompleted.classList.add('current');
-      firstUncompleted.classList.remove('locked');
-      const status = firstUncompleted.querySelector('[data-status]');
-      if (status) {
-        status.className = 'chapter-status status-current';
-        status.textContent = '▶️ ถัดไป';
-      }
-    }
-  });
-</script>
