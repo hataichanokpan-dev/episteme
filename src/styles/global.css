@@ -163,10 +163,28 @@ body {
 /* Progress Section */
 .progress-section {
   background: white;
-  padding: 40px 20px;
-  border-bottom: 1px solid #e2e8f0;
+  padding: 30px;
   border-radius: var(--radius-xl);
   margin-bottom: 30px;
+  box-shadow: var(--shadow-sm);
+}
+
+.progress-section h2 {
+  color: #1a365d;
+  margin-bottom: 20px;
+}
+
+.progress-bar-wrapper {
+  background: #e2e8f0;
+  border-radius: 10px;
+  height: 12px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.progress-text {
+  color: #718096;
+  font-size: 0.95em;
 }
 
 .progress-container {
@@ -248,11 +266,39 @@ body {
   color: inherit;
   display: block;
   position: relative;
+  padding: 20px 25px;
 }
 
 .chapter-card:hover {
   transform: translateY(-5px);
   box-shadow: var(--shadow-md);
+}
+
+.chapter-card .chapter-number {
+  display: inline-block;
+  background: #1a365d;
+  color: white;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.8em;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.chapter-card .chapter-title {
+  font-size: 1.2em;
+  font-weight: 600;
+  color: #1a365d;
+  margin-bottom: 12px;
+}
+
+.chapter-card .chapter-status {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.85em;
+  font-weight: 500;
 }
 
 .chapter-card.completed {
