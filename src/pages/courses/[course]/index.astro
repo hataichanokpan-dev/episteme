@@ -1,0 +1,175 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Progress from '../../../components/Progress';
+
+export async function getStaticPaths() {
+  const courses = await getCollection('courses');
+
+  // Group by course
+  const courseMap = new Map<string, typeof courses>();
+
+  courses.forEach(entry => {
+    const courseId = entry.data.course;
+    if (!courseMap.has(courseId)) {
+      courseMap.set(courseId, []);
+    }
+    courseMap.get(courseId)!.push(entry);
+  });
+
+  const paths = [];
+
+  for (const [courseId, entries] of courseMap.entries()) {
+    // Find index entry
+    const indexEntry = entries.find(e => !e.data.chapter);
+    const chapters = entries
+      .filter(e => e.data.chapter)
+      .sort((a, b) => (a.data.chapter || 0) - (b.data.chapter || 0));
+
+    let renderedContent = null;
+    if (indexEntry) {
+      const { Content } = await render(indexEntry);
+      renderedContent = Content;
+    }
+
+    paths.push({
+      params: { course: courseId },
+      props: {
+        course: indexEntry?.data || { title: courseId, description: '' },
+        chapters: chapters.map(c => ({
+          chapter: c.data.chapter,
+          title: c.data.title,
+          slug: c.id.replace('/index.md', '').split('/').pop()
+        })),
+        Content: renderedContent
+      }
+    });
+  }
+
+  return paths;
+}
+
+const { course, chapters, Content } = Astro.props;
+const { course: courseId } = Astro.params;
+---
+
+<BaseLayout title={course.title} description={course.description}>
+  <div class="header">
+    <div class="emoji">🎓</div>
+    <h1>{course.title}</h1>
+    {course.description && <p class="subtitle">{course.description}</p>}
+    {course.author && <p class="info">{course.author}</p>}
+  </div>
+
+  <Progress course={courseId} totalChapters={chapters.length} client:load />
+
+  <section class="chapters-section">
+    <h2>📖 สารบัญบทเรียน</h2>
+    <div class="chapter-grid">
+      {chapters.map(({ chapter, title, slug }) => (
+        <a
+          href={`/courses/${courseId}/${slug}`}
+          class="chapter-card"
+          data-chapter={chapter}
+        >
+          <span class="chapter-number">บทที่ {chapter}</span>
+          <h3 class="chapter-title">{title.replace(`บทที่ ${chapter}: `, '')}</h3>
+          <span class="chapter-status todo">⬜ ยังไม่เรียน</span>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  {Content && (
+    <section class="resources-section">
+      <Content />
+    </section>
+  )}
+
+  <div class="footer">
+    <p>← <a href="/">กลับหน้าแรก</a></p>
+  </div>
+</BaseLayout>
+
+<style>
+  .chapters-section {
+    background: var(--bg-card);
+    border-radius: var(--radius-xl);
+    padding: 30px;
+    margin-bottom: 30px;
+  }
+
+  .chapters-section h2 {
+    color: var(--color-accent);
+    margin-bottom: 25px;
+  }
+
+  .resources-section {
+    background: var(--bg-card);
+    border-radius: var(--radius-xl);
+    padding: 30px;
+    margin-bottom: 30px;
+  }
+
+  .resources-section :global(h2) {
+    color: var(--color-accent);
+    margin-bottom: 15px;
+  }
+
+  .resources-section :global(a) {
+    color: var(--color-accent);
+  }
+
+  .resources-section :global(table) {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+  }
+
+  .resources-section :global(th),
+  .resources-section :global(td) {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid var(--bg-input);
+  }
+
+  .resources-section :global(th) {
+    color: var(--color-accent);
+  }
+
+  .resources-section :global(td) {
+    color: var(--text-secondary);
+  }
+
+  .footer a {
+    color: var(--color-accent);
+    text-decoration: none;
+  }
+
+  .footer a:hover {
+    text-decoration: underline;
+  }
+</style>
+
+<script>
+  // Update chapter status from localStorage
+  document.addEventListener('DOMContentLoaded', () => {
+    const course = document.querySelector('.chapter-card')?.getAttribute('href')?.split('/')[2];
+    if (!course) return;
+
+    const stored = localStorage.getItem(`episteme-progress-${course}`);
+    if (!stored) return;
+
+    const completed = JSON.parse(stored);
+    document.querySelectorAll('.chapter-card').forEach(card => {
+      const chapter = parseInt(card.getAttribute('data-chapter') || '0');
+      const status = card.querySelector('.chapter-status');
+      if (completed.includes(chapter) && status) {
+        status.className = 'chapter-status done';
+        status.textContent = '✅ เรียนจบ';
+        card.classList.add('completed');
+        card.classList.remove('pending');
+      }
+    });
+  });
+</script>

@@ -1,0 +1,67 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Progress from '../components/Progress';
+
+interface Props {
+  title: string;
+  course: string;
+  chapter?: number;
+  totalChapters?: number;
+}
+
+const { title, course, chapter, totalChapters = 12 } = Astro.props;
+---
+
+<BaseLayout title={title}>
+  <nav class="nav-top">
+    <a href="/" class="nav-home">← หน้าแรก</a>
+    <a href={`/courses/${course}/`} class="nav-course">📋 สารบัญ</a>
+  </nav>
+
+  <article class="course-content">
+    <slot />
+  </article>
+
+  {chapter && (
+    <Progress
+      course={course}
+      chapter={chapter}
+      totalChapters={totalChapters}
+      client:load
+    />
+  )}
+
+  <nav class="nav">
+    {chapter && chapter > 1 && (
+      <a href={`/courses/${course}/${String(chapter - 1).padStart(2, '0')}`} class="nav-link">
+        ← บทก่อนหน้า
+      </a>
+    )}
+    {chapter && chapter < totalChapters && (
+      <a href={`/courses/${course}/${String(chapter + 1).padStart(2, '0')}`} class="nav-link">
+        บทถัดไป →
+      </a>
+    )}
+  </nav>
+</BaseLayout>
+
+<style>
+  .nav-top {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+
+  .nav-top a {
+    color: var(--color-accent);
+    text-decoration: none;
+    padding: 8px 15px;
+    background: var(--bg-card);
+    border-radius: var(--radius-md);
+    transition: background 0.3s ease;
+  }
+
+  .nav-top a:hover {
+    background: var(--bg-card-inner);
+  }
+</style>

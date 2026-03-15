@@ -1,0 +1,165 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CourseCard from '../components/CourseCard';
+import Search from '../components/Search';
+
+// Course data for search
+const coursesData = [
+  {
+    id: 'damodaran-valuation',
+    title: 'Damodaran Valuation',
+    chapters: [
+      { title: 'บทที่ 1: รู้จักกับ Valuation', url: '/courses/damodaran-valuation/01', content: 'Valuation Price Value DCF Relative Valuation Real Options' },
+      { title: 'บทที่ 2: Time Value of Money', url: '/courses/damodaran-valuation/02', content: 'Present Value Future Value Discount Rate Gordon Growth Model' },
+      { title: 'บทที่ 3: Discount Rate (WACC)', url: '/courses/damodaran-valuation/03', content: 'WACC Cost of Equity Cost of Debt CAPM Beta Risk Premium' },
+      { title: 'บทที่ 4: Cash Flow (FCFF/FCFE)', url: '/courses/damodaran-valuation/04', content: 'FCFF FCFE Free Cash Flow Operating Cash Flow CapEx Working Capital' },
+      { title: 'บทที่ 5: Growth Rate', url: '/courses/damodaran-valuation/05', content: 'Growth Rate Retention Ratio ROE Sustainable Growth' },
+      { title: 'บทที่ 6: Terminal Value', url: '/courses/damodaran-valuation/06', content: 'Terminal Value Gordon Growth Exit Multiple' },
+      { title: 'บทที่ 7: DCF Complete', url: '/courses/damodaran-valuation/07', content: 'DCF Discounted Cash Flow Sensitivity Analysis' },
+      { title: 'บทที่ 8: Relative Valuation', url: '/courses/damodaran-valuation/08', content: 'P/E P/B EV/EBITDA P/S Multiples Peer Group' },
+      { title: 'บทที่ 9: Sector-Specific', url: '/courses/damodaran-valuation/09', content: 'Bank Insurance Real Estate Startup Sector Valuation' },
+      { title: 'บทที่ 10: Valuation Traps', url: '/courses/damodaran-valuation/10', content: 'Value Trap Cyclical Declining Business Red Flags' },
+      { title: 'บทที่ 11: หุ้นไทย', url: '/courses/damodaran-valuation/11', content: 'SET CPALL ADVANC BDMS Equity Risk Premium Thailand' },
+      { title: 'บทที่ 12: สรุปและประยุกต์', url: '/courses/damodaran-valuation/12', content: 'Summary Checklist Framework Damodaran' },
+    ]
+  }
+];
+---
+
+<BaseLayout title="หน้าแรก" description="Episteme - แพลตฟอร์มเรียนรู้">
+  <div class="header">
+    <div class="emoji">📚</div>
+    <h1>Episteme</h1>
+    <p class="subtitle">แพลตฟอร์มเรียนรู้ - ภาษากรีกแปลว่า "ความรู้"</p>
+  </div>
+
+  <Search courses={coursesData} client:load />
+
+  <section class="courses-section">
+    <h2>📖 คอร์สทั้งหมด</h2>
+    <div class="courses-grid">
+      <CourseCard
+        title="Damodaran Valuation"
+        description="หลักสูตร 12 บท โดย Prof. Aswath Damodaran - Dean of Valuation"
+        href="/courses/damodaran-valuation/"
+        emoji="🎓"
+        chapters={12}
+        client:load
+      />
+    </div>
+  </section>
+
+  <section class="about-section">
+    <h2>🎯 เกี่ยวกับ Episteme</h2>
+    <p>
+      Episteme (อีพิสเทมี) มาจากภาษากรีก แปลว่า "ความรู้" หรือ "ความเข้าใจ"
+    </p>
+    <p>
+      แพลตฟอร์มนี้สร้างขึ้นเพื่อรวบรวมบทเรียนคุณภาพ พร้อมระบบติดตามความก้าวหน้า
+      และ Quiz เพื่อทดสอบความเข้าใจ
+    </p>
+  </section>
+
+  <div class="footer">
+    <p>สร้างด้วย ❤️ และ Astro</p>
+  </div>
+</BaseLayout>
+
+<style>
+  .courses-section {
+    background: var(--bg-card);
+    border-radius: var(--radius-xl);
+    padding: 30px;
+    margin-bottom: 30px;
+  }
+
+  .courses-section h2 {
+    color: var(--color-accent);
+    margin-bottom: 25px;
+  }
+
+  .courses-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+  }
+
+  .about-section {
+    background: var(--bg-card);
+    border-radius: var(--radius-xl);
+    padding: 30px;
+    margin-bottom: 30px;
+  }
+
+  .about-section h2 {
+    color: var(--color-accent);
+    margin-bottom: 20px;
+  }
+
+  .about-section p {
+    color: var(--text-secondary);
+    margin-bottom: 15px;
+    line-height: 1.8;
+  }
+
+  /* Course Card Styles */
+  .course-card {
+    display: block;
+    background: var(--bg-card-inner);
+    border-radius: var(--radius-lg);
+    padding: 25px;
+    text-decoration: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-left: 4px solid var(--color-accent);
+  }
+
+  .course-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .course-emoji {
+    font-size: 2.5em;
+    margin-bottom: 15px;
+  }
+
+  .course-title {
+    color: #fff;
+    font-size: 1.3em;
+    margin-bottom: 10px;
+  }
+
+  .course-description {
+    color: var(--text-muted);
+    font-size: 0.95em;
+    margin-bottom: 15px;
+    line-height: 1.6;
+  }
+
+  .course-progress-bar {
+    background: var(--bg-input);
+    border-radius: 10px;
+    height: 8px;
+    overflow: hidden;
+    margin-bottom: 8px;
+  }
+
+  .course-progress-fill {
+    background: linear-gradient(90deg, var(--color-accent), var(--color-success));
+    height: 100%;
+    border-radius: 10px;
+    transition: width 0.5s ease;
+  }
+
+  .course-progress-text {
+    color: var(--text-muted);
+    font-size: 0.85em;
+  }
+
+  /* Search result course name */
+  .search-result-course {
+    color: var(--color-success);
+    font-size: 0.8em;
+    margin-bottom: 5px;
+  }
+</style>
