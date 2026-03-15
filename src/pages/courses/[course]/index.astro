@@ -39,7 +39,7 @@ export async function getStaticPaths() {
         chapters: chapters.map(c => ({
           chapter: c.data.chapter,
           title: c.data.title,
-          slug: c.id.replace('/index.md', '').split('/').pop()
+          slug: c.id.split('/').pop()?.replace('.md', '') || ''
         })),
         Content: renderedContent
       }
@@ -69,7 +69,7 @@ const base = import.meta.env.BASE_URL;
     <div class="chapter-grid">
       {chapters.map(({ chapter, title, slug }) => (
         <a
-          href={`${base}courses/${courseId}/${slug}/`}
+          href={`${base}/courses/${courseId}/${slug}/`}
           class="chapter-card"
           data-chapter={chapter}
         >
@@ -88,7 +88,7 @@ const base = import.meta.env.BASE_URL;
   )}
 
   <div class="footer">
-    <p>← <a href={`${base}`}>กลับหน้าแรก</a></p>
+    <p>← <a href={`${base}/`}>กลับหน้าแรก</a></p>
   </div>
 </BaseLayout>
 
