@@ -10,12 +10,13 @@ interface Props {
 }
 
 const { title, course, chapter, totalChapters = 12 } = Astro.props;
+const base = import.meta.env.BASE_URL;
 ---
 
 <BaseLayout title={title}>
   <nav class="nav-top">
-    <a href="/" class="nav-home">← หน้าแรก</a>
-    <a href={`/courses/${course}/`} class="nav-course">📋 สารบัญ</a>
+    <a href={`${base}`} class="nav-home">← หน้าแรก</a>
+    <a href={`${base}courses/${course}/`} class="nav-course">📋 สารบัญ</a>
   </nav>
 
   <article class="course-content">
@@ -33,12 +34,12 @@ const { title, course, chapter, totalChapters = 12 } = Astro.props;
 
   <nav class="nav">
     {chapter && chapter > 1 && (
-      <a href={`/courses/${course}/${String(chapter - 1).padStart(2, '0')}`} class="nav-link">
+      <a href={`${base}courses/${course}/${String(chapter - 1).padStart(2, '0')}/`} class="nav-link">
         ← บทก่อนหน้า
       </a>
     )}
     {chapter && chapter < totalChapters && (
-      <a href={`/courses/${course}/${String(chapter + 1).padStart(2, '0')}`} class="nav-link">
+      <a href={`${base}courses/${course}/${String(chapter + 1).padStart(2, '0')}/`} class="nav-link">
         บทถัดไป →
       </a>
     )}
