@@ -1,16 +1,16 @@
 ---
 title: "Jeffrey Neumann Trading"
 subtitle: "Unknown Market Wizard - $2,500 → $50M+"
-description: "หลักสูตร 10 บท จาก Jeffrey Neumann - นักลงทุนที่ทำผลตอบแทน 2,000,000% (จาก $2,500 เป็น $50M+)"
+description: "หลักสูตร 11 บท จาก Jeffrey Neumann - นักลงทุนที่ทำผลตอบแทน 2,000,000% (จาก $2,500 เป็น $50M+)"
 course: jeffrey-neumann-trading
 author: "Jeffrey Neumann - Unknown Market Wizards by Jack Schwager"
 emoji: "📈"
-topics: ["Four Corners Framework", "Small Caps", "Risk Management"]
+topics: ["Four Corners Framework", "Small Caps", "Risk Management", "Stock Scanner"]
 ---
 
 # Jeffrey Neumann Trading Course
 
-หลักสูตร 10 บท จาก **Jeffrey Neumann** - นักลงทุนที่ทำผลตอบแทน **2,000,000%** (จาก $2,500 เป็น $50M+)
+หลักสูตร 11 บท จาก **Jeffrey Neumann** - นักลงทุนที่ทำผลตอบแทน **2,000,000%** (จาก $2,500 เป็น $50M+)
 
 ## ตัวตน
 
@@ -36,6 +36,7 @@ topics: ["Four Corners Framework", "Small Caps", "Risk Management"]
 | 8 | [Entry & Pyramiding](/courses/jeffrey-neumann-trading/08) | |
 | 9 | [Exit & Risk Management](/courses/jeffrey-neumann-trading/09) | |
 | 10 | [Psychology & Daily Routine](/courses/jeffrey-neumann-trading/10) | |
+| **11** | [🏆 บทพิเศษ: Neumann Stock Scanner](/courses/jeffrey-neumann-trading/11) | ★ NEW |
 
 ## กฎเหล็ก 5 ข้อ
 
