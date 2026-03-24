@@ -1,8 +1,11 @@
 ---
 title: "Damodaran Valuation"
-description: "หลักสูตร 12 บท โดย Prof. Aswath Damodaran - Dean of Valuation"
+subtitle: "ศิลปะและศาสตร์แห่งการประเมินมูลค่าธุรกิจ"
+description: "หลักสูตร 12 บท โดย Prof. Aswath Damodaran - Dean of Valuation จาก NYU Stern School of Business"
 course: damodaran-valuation
 author: "Prof. Aswath Damodaran - NYU Stern School of Business"
+emoji: "🎓"
+topics: ["DCF Valuation", "Relative Valuation", "หุ้นไทย"]
 ---
 
 # 🎓 Damodaran Valuation Course

@@ -1,46 +1,53 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
 
 const base = import.meta.env.BASE_URL;
 
-const courses = [
-  {
-    id: 'damodaran-valuation',
-    title: 'Damodaran Valuation',
-    subtitle: 'ศิลปะและศาสตร์แห่งการประเมินมูลค่าธุรกิจ',
-    emoji: '🎓',
-    chapters: 12,
-    description: 'หลักสูตร 12 บท โดย Prof. Aswath Damodaran - Dean of Valuation จาก NYU Stern School of Business',
-    topics: ['DCF Valuation', 'Relative Valuation', 'หุ้นไทย']
-  },
-  {
-    id: 'seth-klarman-margin-of-safety',
-    title: 'Seth Klarman: Margin of Safety',
-    subtitle: 'Value Investing แบบ Conservative',
-    emoji: '🛡️',
-    chapters: 10,
-    description: 'หลักสูตร 10 บท โดย Seth Klarman - ผู้จัดการกองทุน Baupost Group และผู้เขียนหนังสือ Margin of Safety',
-    topics: ['Risk Management', 'Value Investing', 'Contrarian Thinking']
-  },
-  {
-    id: '10k-running-training',
-    title: '10K Running Training',
-    subtitle: 'แนวทางการพัฒนานักวิ่ง 10K ที่เก่งที่สุด',
-    emoji: '🏃',
-    chapters: 1,
-    description: 'Evidence-Based Training Guide - อ้างอิงจากงานวิจัยทางวิทยาศาสตร์ เน้น Polarized Training (80/20)',
-    topics: ['Polarized Training', 'Periodization', 'Evidence-Based']
-  },
-  {
-    id: '80-20-running',
-    title: '80/20 Running by Matt Fitzgerald',
-    subtitle: 'Run Stronger and Race Faster by Training Slower',
-    emoji: '📖',
-    chapters: 1,
-    description: 'แนวทางการซ้อมวิ่งแบบละเอียดจาก Matt Fitzgerald - 7 Training Zones, คำนวณ paces, โปรแกรมซ้อม 3 ระดับ',
-    topics: ['Matt Fitzgerald', '7 Zones', 'Training Plans']
+// Fetch all courses and group by course ID
+const allCourses = await getCollection('courses');
+
+// Group courses by course ID and extract metadata
+const courseMap = new Map<string, {
+  id: string;
+  title: string;
+  subtitle: string;
+  emoji: string;
+  chapters: number;
+  description: string;
+  topics: string[];
+}>();
+
+allCourses.forEach(entry => {
+  const courseId = entry.data.course;
+  const isIndex = entry.id.endsWith('index.md') || entry.id.endsWith('index.mdx');
+
+  if (isIndex) {
+    // Initialize course from index file
+    courseMap.set(courseId, {
+      id: courseId,
+      title: entry.data.title,
+      subtitle: entry.data.subtitle || '',
+      emoji: entry.data.emoji || '📖',
+      chapters: 0, // Will count below
+      description: entry.data.description || '',
+      topics: entry.data.topics || [],
+    });
   }
-];
+});
+
+// Count chapters for each course
+allCourses.forEach(entry => {
+  const courseId = entry.data.course;
+  const isIndex = entry.id.endsWith('index.md') || entry.id.endsWith('index.mdx');
+
+  if (!isIndex && courseMap.has(courseId)) {
+    const course = courseMap.get(courseId)!;
+    course.chapters++;
+  }
+});
+
+const courses = Array.from(courseMap.values());
 ---
 
 <BaseLayout title="หน้าแรก" description="Episteme - แพลตฟอร์มเรียนรู้">

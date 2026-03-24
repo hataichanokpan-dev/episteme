@@ -1,8 +1,11 @@
 ---
 title: "10K Running Training"
-description: "แนวทางการพัฒนาเป็นนักวิ่ง 10K ที่เก่งที่สุด - Evidence-Based"
+subtitle: "แนวทางการพัฒนานักวิ่ง 10K ที่เก่งที่สุด"
+description: "Evidence-Based Training Guide - อ้างอิงจากงานวิจัยทางวิทยาศาสตร์ เน้น Polarized Training (80/20)"
 course: 10k-running-training
 author: "Evidence-Based Research"
+emoji: "🏃"
+topics: ["Polarized Training", "Periodization", "Evidence-Based"]
 ---
 
 # 🏃 10K Running Training

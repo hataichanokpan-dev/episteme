@@ -1,8 +1,11 @@
 ---
 title: "80/20 Running by Matt Fitzgerald"
-description: "แนวทางการซ้อมวิ่งแบบละเอียดจาก Matt Fitzgerald - Run Stronger and Race Faster by Training Slower"
+subtitle: "Run Stronger and Race Faster by Training Slower"
+description: "แนวทางการซ้อมวิ่งแบบละเอียดจาก Matt Fitzgerald - 7 Training Zones, คำนวณ paces, โปรแกรมซ้อม 3 ระดับ"
 course: 80-20-running
 author: "Matt Fitzgerald"
+emoji: "📖"
+topics: ["Matt Fitzgerald", "7 Zones", "Training Plans"]
 ---
 
 # 🏃 80/20 Running by Matt Fitzgerald

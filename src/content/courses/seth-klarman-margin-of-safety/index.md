@@ -1,8 +1,11 @@
 ---
 title: "Seth Klarman: Margin of Safety"
-description: "หลักสูตร 10 บท - Value Investing แบบ Conservative โดย Seth Klarman"
+subtitle: "Value Investing แบบ Conservative"
+description: "หลักสูตร 10 บท โดย Seth Klarman - ผู้จัดการกองทุน Baupost Group และผู้เขียนหนังสือ Margin of Safety"
 course: seth-klarman-margin-of-safety
 author: "Seth Klarman - Baupost Group"
+emoji: "🛡️"
+topics: ["Risk Management", "Value Investing", "Contrarian Thinking"]
 ---
 
 # 🎓 Seth Klarman: Margin of Safety
